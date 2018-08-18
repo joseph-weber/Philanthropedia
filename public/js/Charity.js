@@ -46,7 +46,13 @@ class Charity extends React.Component {
       {this.props.charities.map((charity, index) =>
       {
         return (
-      <h1>{charity}</h1>
+      <div className="charity">
+      <h1>{charity.name}</h1>
+      <h2>{charity.street_address}</h2>
+      <h2>{charity.city}</h2>
+      <h2>{charity.zip}</h2>
+      <h2>{charity.state}</h2>
+      </div>
     )
     }
     )}
