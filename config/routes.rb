@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   post '/users', to: 'users#create'
   delete '/users/:id', to: 'users#delete'
 
-  get '/charities', to: 'charities#index'
+  get '/charities/:query', to: 'charities#index'
 
 
 end
