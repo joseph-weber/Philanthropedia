@@ -2,7 +2,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      charities: null
+      charities: false
     }
     this.getCharities = this.getCharities.bind(this)
   }
@@ -10,16 +10,20 @@ class App extends React.Component {
     fetch("/charities/" + query)
       .then(response => response.json())
         .then(query_charities => {
-          console.log(query_charities)
           this.setState({
             charities: query_charities
           })
           console.log(this.state)
-        }).catch(error => console.log(error));
+        }).catch(error => this.setState({
+          charities: false
+        }));
   }
   render(){
     return (
+    <div>
+    <Nav/>
     <Charity charities={this.state.charities} functionExecute = {this.getCharities}/>
+    </div>
   )
   }
 }
