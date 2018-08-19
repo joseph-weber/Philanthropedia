@@ -18,6 +18,7 @@ class Charity extends React.Component {
       let zip;
       let city;
       let state;
+      let category;
       if(this.refs.zip){
         zip = '&zip=' + this.refs.zip.value
       } else {
@@ -33,7 +34,15 @@ class Charity extends React.Component {
       } else {
         state = ''
       }
-      const query = zip + city + state
+      if(this.refs.category){
+        if(this.refs.category > 0){
+          category = '&categoryID=' + this.refs.category.value
+        } else {
+           category = ''
+        }
+        }
+      const query = category + zip + city + state
+      console.log(query)
       setTimeout(
     function() {
         this.setState({showBoard: true});
@@ -53,6 +62,20 @@ class Charity extends React.Component {
           <input className="input is-primary" ref="city" type="text" placeholder="city"/>
           <input className="input is-primary" ref="zip" type="text" placeholder="zip"/>
           <input className="input is-primary" ref="state" type="text" placeholder="state"/>
+          <select className="select is-primary is-medium" ref="category" name="category">
+            <option value="0">All</option>
+            <option value="1">Animals</option>
+            <option value="2">Arts, Culture, Humanities</option>
+            <option value="3">Education</option>
+            <option value="4">Environment</option>
+            <option value="5">Health</option>
+            <option value="6">Human Services</option>
+            <option value="7">International</option>
+            <option value="8">Human & Civil Rights</option>
+            <option value="9">Religion</option>
+            <option value="10">Community Devlopment</option>
+            <option value="11">Research & Public Policy</option>
+          </select>
           <input className="button is-primary" type="submit" value="submit answer"/>
         </form>
       </div>
