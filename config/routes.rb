@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/users', to: 'users#index'
-  get '/users/:id', to: 'users#show'
+  get '/users/:username', to: 'users#username'
   post '/users', to: 'users#create'
   delete '/users/:id', to: 'users#delete'
 

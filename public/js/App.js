@@ -2,6 +2,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
+      loggedUser: null,
       charities: false,
       page: {
         userLogin: false,
@@ -16,6 +17,11 @@ class App extends React.Component {
       }
     }
     this.getCharities = this.getCharities.bind(this)
+    this.setUser = this.setUser.bind(this)
+    this.hello = this.hello.bind(this)
+  }
+  hello(){
+    console.log(this.state.loggedUser)
   }
   getCharities(query) {
     fetch("/charities/" + query)
@@ -29,13 +35,21 @@ class App extends React.Component {
           charities: false
         }));
   }
+  setUser(new_user){
+  if(new_user != null){
+    new_user["password"] = "Nice Try";
+  }
+  this.setState({loggedUser: new_user});
+  console.log(this.state)
+  console.log('this is where logged user should be')
+  }
   render(){
     return (
     <div>
       <Nav/>
       <Charity charities={this.state.charities} functionExecute = {this.getCharities}/>
       <Footer/>
-      <UserForm/>
+      <UserForm functionExecute={this.setUser}/>
     </div>
   )
   }

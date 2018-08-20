@@ -1,9 +1,16 @@
 class UserForm extends React.Component {
   constructor(props){
     super(props)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
   handleSubmit(event){
-
+    event.preventDefault();
+    console.log('mogli')
+    const new_user = {
+    user_name: this.refs.username.value,
+    password: this.refs.password.value
+    }
+    this.props.functionExecute(new_user);
   }
   render(){
     return(
