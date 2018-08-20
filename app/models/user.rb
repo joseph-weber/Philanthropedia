@@ -21,16 +21,28 @@ class User
   def self.findByName(name)
     results = DB.exec(
       <<-SQL
-        SELECT *
+        SELECT
+          users.*,
+          favorites.user_id,
+          favorites.charity_id,
+          favorites.charity_name
         FROM users
+        LEFT JOIN
+          favorites
+        ON users.id = favorites.user_id
         WHERE username = #{name};
       SQL
     )
+    favorites = []
+    results.each do |result|
+      favorites.push(result["charity_name"])
+    end
     results = results.first
     return {
       "id" => results["id"].to_i,
       "username" => results["username"],
-      "password" => results["password"]
+      "password" => results["password"],
+      "favorites" => favorites
     }
   end
 
@@ -48,6 +60,8 @@ class User
         "password" => results.first["password"]
     }
   end
+
+
 
 
 

@@ -4,21 +4,64 @@ class App extends React.Component {
     this.state = {
       loggedUser: null,
       charities: false,
+      lastFavorite: {},
       page: {
         userLogin: false,
         userRegister: false,
         userShow: false,
         userEdit: false,
-        postList: true,
-        postShow: false,
-        postForm: false,
-        postEdit: false
-
+        charitesSearch: true
       }
     }
     this.getCharities = this.getCharities.bind(this)
     this.setUser = this.setUser.bind(this)
     this.loginUser = this.loginUser.bind(this)
+    this.login = this.login.bind(this)
+    this.changePage = this.changePage.bind(this)
+    this.logOut = this.logOut.bind(this)
+    this.createLike = this.createLike.bind(this)
+  }
+  changePage (newPage) {
+    let toUpdate = {};
+    for(let key in this.state.page){
+      toUpdate[key] = false;
+    }
+    toUpdate[newPage] = true;
+    this.setState({page: toUpdate })
+  }
+  login(){
+    this.setState({
+      page: {
+        userLogin: true,
+        userRegister: false,
+        userShow: false,
+        userEdit: false,
+        charitesSearch: true
+      }
+    })
+  }
+  logOut(){
+    this.setState({
+      loggedUser: null
+    })
+  }
+  createLike(new_like){
+    console.log(new_like)
+    console.log(new_like)
+    fetch("/favorites", {
+      body: JSON.stringify(new_like),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdLike => {
+      console.log('createLike')
+      console.log(createdLike)
+      return createdLike.json()
+    })
+    .catch(error => console.log(error))
   }
   getCharities(query) {
     fetch("/charities/" + query)
@@ -52,14 +95,31 @@ class App extends React.Component {
         }).catch(error => {
             console.log(error);
         });
+        this.changePage('charitiesSearch')
   }
   render(){
     return (
     <div>
-      <Nav/>
-      <Charity charities={this.state.charities} functionExecute = {this.getCharities}/>
+      <Nav
+      changePage={this.changePage}
+      openLoginForm={this.login}
+      logOut={this.logOut}
+      currentUser={this.state.loggedUser}
+      />
+      <Charity
+      loggedUser={this.state.loggedUser}
+      createLike={this.createLike}
+      userLogin={this.state.page.userLogin} charities={this.state.charities} functionExecute = {this.getCharities}/>
+      {
+        (this.state.loggedUser == null && this.state.page.userLogin == true) ?
+        <UserForm
+        changePage={this.changePage}
+        functionExecute={this.loginUser}
+        />
+        :
+        ''
+      }
       <Footer/>
-      <UserForm functionExecute={this.loginUser}/>
     </div>
   )
   }

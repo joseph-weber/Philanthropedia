@@ -14,8 +14,9 @@ class UserForm extends React.Component {
   }
   render(){
     return(
-      <div className="nav">
-        <form onSubmit={this.handleSubmit}>
+      <div className="userformPage">
+        <form className="userform" onSubmit={this.handleSubmit}>
+        <h1>Enter User Info Below</h1>
           <input className="input is-primary" ref="username" type="text" placeholder="username"/>
           <input className="input is-primary" ref="password" type="password" placeholder="password"/>
           <input className="button is-primary" type="submit" value="submit answer"/>

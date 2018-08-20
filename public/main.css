@@ -69,7 +69,7 @@ form input {
   background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .footer {
@@ -81,6 +81,7 @@ form input {
 }
 
 .footer h1 {
+  text-align: center;
 }
 
 .nav img {
@@ -100,4 +101,29 @@ form input {
   width: 100%;
   text-align: center;
   color: whitesmoke;
+}
+
+
+.userformPage {
+  height: 1000px;
+  background-color: #333333;;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.userform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+  background: whitesmoke;
+  border-radius: 50%;
+}
+
+.userform input {
+  width: 50%;
+  margin-top: 20px;
 }

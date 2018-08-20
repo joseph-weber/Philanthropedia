@@ -6,7 +6,20 @@ class Charity extends React.Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.clearBoard = this.clearBoard.bind(this)
+    this.like = this.like.bind(this)
   }
+    like(charity, user){
+      console.log('red')
+      console.log(charity)
+      console.log(user)
+      const new_like = {
+        user_id: user.id,
+        charity_id: charity.id,
+        charity_name: charity.name
+      }
+      console.log(new_like)
+      this.props.createLike(new_like)
+    }
     clearBoard(){
       this.setState({
         showBoard: false
@@ -50,13 +63,14 @@ class Charity extends React.Component {
     .bind(this),
     1750
 );
-      console.log(this.state.showBoard)
       this.props.functionExecute(query)
     }
   render(){
     return (
     <div>
       <h1 className="bigText">Your Source For Charitable Institutions</h1>
+      {
+        !this.props.userLogin ?
       <div className="form">
         <h1>Search For Your Charity Here</h1>
         <form onSubmit={this.handleSubmit}>
@@ -84,6 +98,9 @@ class Charity extends React.Component {
         : ''
       }
       </div>
+      :
+    ''
+  }
       {this.props.charities == null ?
       <div className="result">No results matched your search</div>
     :
@@ -102,7 +119,7 @@ class Charity extends React.Component {
                         <h2>{charity.city}</h2>
                         <h2>{charity.zip}</h2>
                         <h2>{charity.state}</h2>
-                        <button className="button is-primary">Like</button>
+                        <button onClick={()=>{this.like(charity, this.props.loggedUser)}} className="button is-primary">Like</button>
                       </div>
                       )
                     }
