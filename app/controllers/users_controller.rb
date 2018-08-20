@@ -5,8 +5,8 @@ class UsersController < ApplicationController
     render json: User.all
   end
 
-  def show
-    render json: User.find(params["username"])
+  def showName
+    render json: User.findByName(params["username"])
   end
 
   def create

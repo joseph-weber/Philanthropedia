@@ -18,10 +18,7 @@ class App extends React.Component {
     }
     this.getCharities = this.getCharities.bind(this)
     this.setUser = this.setUser.bind(this)
-    this.hello = this.hello.bind(this)
-  }
-  hello(){
-    console.log(this.state.loggedUser)
+    this.loginUser = this.loginUser.bind(this)
   }
   getCharities(query) {
     fetch("/charities/" + query)
@@ -40,8 +37,21 @@ class App extends React.Component {
     new_user["password"] = "Nice Try";
   }
   this.setState({loggedUser: new_user});
-  console.log(this.state)
-  console.log('this is where logged user should be')
+  console.log(this.state.loggedUser)
+}
+  loginUser(new_user){
+    fetch("/users/find/'" + new_user.user_name + "'")
+      .then(response => response.json())
+        .then(logged_user => {
+          if(new_user.password === logged_user.password){
+            this.setUser(logged_user);
+          } else {
+            this.setState({ errorWrongPassword: true });
+            console.log("Wrong Password");
+          }
+        }).catch(error => {
+            console.log(error);
+        });
   }
   render(){
     return (
@@ -49,7 +59,7 @@ class App extends React.Component {
       <Nav/>
       <Charity charities={this.state.charities} functionExecute = {this.getCharities}/>
       <Footer/>
-      <UserForm functionExecute={this.setUser}/>
+      <UserForm functionExecute={this.loginUser}/>
     </div>
   )
   }

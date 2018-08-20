@@ -18,12 +18,12 @@ class User
   end
 
 
-  def self.find(username)
+  def self.findByName(name)
     results = DB.exec(
       <<-SQL
         SELECT *
         FROM users
-        WHERE username = #{username};
+        WHERE username = #{name};
       SQL
     )
     results = results.first
