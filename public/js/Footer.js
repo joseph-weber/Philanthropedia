@@ -1,0 +1,29 @@
+class Footer extends React.Component {
+  constructor(props){
+    super(props)
+  }
+    footer(){
+      console.log('hi')
+    }
+  render(){
+    return(
+      <div className="footer">
+        <div>
+          <h1>Pupsi</h1>
+          <h1>Pupsi</h1>
+          <h1>Pupsi</h1>
+        </div>
+        <div>
+          <h1>Pupsi</h1>
+          <h1>Pupsi</h1>
+          <h1>Pupsi</h1>
+        </div>
+        <div>
+          <h1>Pupsi</h1>
+          <h1>Pupsi</h1>
+          <h1>Pupsi</h1>
+        </div>
+      </div>
+    )
+  }
+}

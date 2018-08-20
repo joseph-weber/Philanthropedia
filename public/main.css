@@ -2,6 +2,13 @@ body {
   max-width: 1500px;
   display: flex;
   flex-direction: column;
+  background-color: #333333;
+  font-family: 'Playfair Display', serif;
+}
+
+.charities {
+  display: flex;
+  flex-flow: wrap;
 }
 
 .charity {
@@ -12,13 +19,20 @@ body {
 }
 
 div {
-  border: 1px solid gold;
+  /* border: 1px solid gold; */
 }
 
+.clear {
+  text-align: center
+}
 
+.bigText {
+  color: whitesmoke;
+  text-align: center;
+  font-size: 50px;
+}
 
 .form {
-    margin: 0 auto;
     max-width: 500px;
     height: 500px;
     display: flex;
@@ -28,12 +42,17 @@ div {
     box-shadow: 0 0 10px rgb(96,96,96);
     justify-content: center;
     align-items: center;
+    margin: 50px auto;
 }
 
 form {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+}
+
+.form h1 {
+  font-size: 20px;
 }
 
 form input {
@@ -47,12 +66,38 @@ form input {
 }
 
 .nav {
+  background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
+.footer {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.footer h1 {
+}
+
 .nav img {
   width: 50px;
   height: 50px;
+}
+
+.charity {
+  width: 40%;
+  background-color: whitesmoke;
+  text-align: center;
+  margin: 20px auto;
+  border-radius: 30px;
+}
+
+.result {
+  width: 100%;
+  text-align: center;
+  color: whitesmoke;
 }

@@ -56,13 +56,14 @@ class Charity extends React.Component {
   render(){
     return (
     <div>
+      <h1 className="bigText">Your Source For Charitable Institutions</h1>
       <div className="form">
         <h1>Search For Your Charity Here</h1>
         <form onSubmit={this.handleSubmit}>
           <input className="input is-primary" ref="city" type="text" placeholder="city"/>
           <input className="input is-primary" ref="zip" type="text" placeholder="zip"/>
           <input className="input is-primary" ref="state" type="text" placeholder="state"/>
-          <select className="select is-primary is-medium" ref="category" name="category">
+          <select className="select" ref="category" name="category">
             <option value="0">All</option>
             <option value="1">Animals</option>
             <option value="2">Arts, Culture, Humanities</option>
@@ -78,38 +79,42 @@ class Charity extends React.Component {
           </select>
           <input className="button is-primary" type="submit" value="submit answer"/>
         </form>
+        {this.props.charities && this.props.charities.length != 0 ?
+        <button className="button is-primary" onClick={()=>{this.clearBoard()}}>Clear</button>
+        : ''
+      }
       </div>
       {this.props.charities == null ?
-      <div>No results matched your search</div>
+      <div className="result">No results matched your search</div>
     :
-      <div>Your results are below</div>
+      <div className="result">Your results are below</div>
     }
       {this.state.showBoard && this.props.charities ?
         <div>
-        {this.props.charities.length != 0 ?
-          <div>
-            <button onClick={()=>{this.clearBoard()}}>Clear</button>
-            {this.props.charities.map((charity, index) =>
-                {
-                  return (
-                    <div className="charity">
-                      <h1>{charity.name}</h1>
-                      <h2>{charity.street_address}</h2>
-                      <h2>{charity.city}</h2>
-                      <h2>{charity.zip}</h2>
-                      <h2>{charity.state}</h2>
-                    </div>
-                    )
-                  }
-                )}
-              </div>
-        : <div>
-            <h1>No results match your search</h1>
-          </div>
-        }
-      </div>
-    : <div>Search</div>
-  }
+          {this.props.charities.length != 0 ?
+              <div className="charities">
+              {this.props.charities.map((charity, index) =>
+                  {
+                    return (
+                      <div className="charity">
+                        <h1>{charity.name}</h1>
+                        <h2>{charity.street_address}</h2>
+                        <h2>{charity.city}</h2>
+                        <h2>{charity.zip}</h2>
+                        <h2>{charity.state}</h2>
+                        <button className="button is-primary">Like</button>
+                      </div>
+                      )
+                    }
+                  )}
+                </div>
+          : <div>
+              <h1>No results match your search</h1>
+            </div>
+          }
+        </div>
+      : ''
+    }
 
     </div>
   )

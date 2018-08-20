@@ -2,7 +2,18 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      charities: false
+      charities: false,
+      page: {
+        userLogin: false,
+        userRegister: false,
+        userShow: false,
+        userEdit: false,
+        postList: true,
+        postShow: false,
+        postForm: false,
+        postEdit: false
+
+      }
     }
     this.getCharities = this.getCharities.bind(this)
   }
@@ -21,8 +32,10 @@ class App extends React.Component {
   render(){
     return (
     <div>
-    <Nav/>
-    <Charity charities={this.state.charities} functionExecute = {this.getCharities}/>
+      <Nav/>
+      <Charity charities={this.state.charities} functionExecute = {this.getCharities}/>
+      <Footer/>
+      <UserForm/>
     </div>
   )
   }
