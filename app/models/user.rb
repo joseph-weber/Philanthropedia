@@ -50,13 +50,13 @@ class User
     results = DB.exec(
         <<-SQL
             INSERT INTO users (username, password)
-            VALUES ( #{opts["username"]}, #{opts["password"]})
+            VALUES ( '#{opts["user_name"]}', '#{opts["password"]}')
             RETURNING id, username, password;
         SQL
     )
     return {
         "id" => results.first["id"].to_i,
-        "username" => results.first["username"],
+        "user_name" => results.first["username"],
         "password" => results.first["password"]
     }
   end

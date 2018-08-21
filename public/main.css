@@ -72,6 +72,20 @@ form input {
   align-items: flex-end;
 }
 
+.nav div {
+  text-align: center;
+  width: 150px;
+}
+
+.nav h1 {
+  text-align: center;
+}
+
+
+.navright h1 {
+  text-align: right;
+}
+
 .footer {
   background-color: whitesmoke;
   display: flex;

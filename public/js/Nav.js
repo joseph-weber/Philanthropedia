@@ -5,15 +5,30 @@ class Nav extends React.Component {
   render(){
     return(
       <div className="nav">
-        <h1><img src="p3.png"/>hilathropedia</h1>
+        <div>
+          <h1 onClick={()=>{this.props.changePage('charitiesSearch')}}><img src="p3.png"/>hilathropedia</h1>
+        </div>
         {
           this.props.currentUser != null ?
-          <h1>{this.props.currentUser.username}</h1>
+          <div>
+            <h1>{this.props.currentUser.username}</h1>
+          </div>
+        :
+          <div>
+            <h1
+            onClick={()=>this.props.changePage("userRegister")}>Register user</h1>
+          </div>
+      }
+        {
+          this.props.currentUser != null ?
+          <div className="navright">
+            <h1 onClick={()=>{this.props.logOut()}}>logOut</h1>
+          </div>
             :
-          <h1 onClick={()=>{this.props.changePage('userLogin')}}>Log-in</h1>
+          <div className="navright">
+            <h1 onClick={()=>{this.props.changePage('userLogin')}}>Log-in</h1>
+          </div>
         }
-        <h1>Your Profile</h1>
-        <h1 onClick={()=>{this.props.logOut()}}>logOut</h1>
       </div>
     )
   }

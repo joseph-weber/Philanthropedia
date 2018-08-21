@@ -10,16 +10,17 @@ class App extends React.Component {
         userRegister: false,
         userShow: false,
         userEdit: false,
-        charitesSearch: true
+        charitiesSearch: true
       }
     }
     this.getCharities = this.getCharities.bind(this)
     this.setUser = this.setUser.bind(this)
     this.loginUser = this.loginUser.bind(this)
-    this.login = this.login.bind(this)
     this.changePage = this.changePage.bind(this)
     this.logOut = this.logOut.bind(this)
     this.createLike = this.createLike.bind(this)
+    this.register = this.register.bind(this)
+    this.createUser= this.createUser.bind(this)
   }
   changePage (newPage) {
     let toUpdate = {};
@@ -29,16 +30,28 @@ class App extends React.Component {
     toUpdate[newPage] = true;
     this.setState({page: toUpdate })
   }
-  login(){
-    this.setState({
-      page: {
-        userLogin: true,
-        userRegister: false,
-        userShow: false,
-        userEdit: false,
-        charitesSearch: true
-      }
-    })
+  createUser(new_user){
+  // console.log("Creating new User");
+  // console.log(new_user);
+  fetch("/users", {
+    body: JSON.stringify(new_user),
+    method: "POST",
+    headers: {
+      'Accept': 'application/json, text/plain, */*',
+      'Content-Type': 'application/json'
+    }
+  })
+  .then(createdUser => {
+    return createdUser.json()
+  })
+  .then(jsonedUser => {
+    this.loginUser(jsonedUser);
+    // this.changePage("postList");
+  })
+  .catch(error => console.log(error));
+}
+  register(){
+    console.log('come and register')
   }
   logOut(){
     this.setState({
@@ -83,6 +96,7 @@ class App extends React.Component {
   console.log(this.state.loggedUser)
 }
   loginUser(new_user){
+    console.log(new_user)
     fetch("/users/find/'" + new_user.user_name + "'")
       .then(response => response.json())
         .then(logged_user => {
@@ -100,18 +114,22 @@ class App extends React.Component {
   render(){
     return (
     <div>
-      <Nav
-      changePage={this.changePage}
-      openLoginForm={this.login}
-      logOut={this.logOut}
-      currentUser={this.state.loggedUser}
-      />
-      <Charity
-      loggedUser={this.state.loggedUser}
-      createLike={this.createLike}
-      userLogin={this.state.page.userLogin} charities={this.state.charities} functionExecute = {this.getCharities}/>
+        <Nav
+        changePage={this.changePage}
+        openLoginForm={this.login}
+        logOut={this.logOut}
+        currentUser={this.state.loggedUser}
+        />
       {
-        (this.state.loggedUser == null && this.state.page.userLogin == true) ?
+        (this.state.page.charitiesSearch == true) ?
+        <Charity
+        loggedUser={this.state.loggedUser}
+        createLike={this.createLike}
+        userLogin={this.state.page.userLogin} charities={this.state.charities} functionExecute = {this.getCharities}/>
+        : ''
+      }
+      {
+        (this.state.page.userLogin == true) ?
         <UserForm
         changePage={this.changePage}
         functionExecute={this.loginUser}
@@ -119,6 +137,13 @@ class App extends React.Component {
         :
         ''
       }
+      {
+          this.state.page.userRegister ?
+            <UserForm
+              functionExecute={this.createUser}
+              title="Register User"/>
+          : ''
+        }
       <Footer/>
     </div>
   )
