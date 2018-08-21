@@ -20,6 +20,9 @@ class Charity extends React.Component {
       console.log(new_like)
       this.props.createLike(new_like)
     }
+    dislike(){
+      console.log('hello')
+    }
     clearBoard(){
       this.setState({
         showBoard: false
@@ -119,7 +122,11 @@ class Charity extends React.Component {
                         <h2>{charity.city}</h2>
                         <h2>{charity.zip}</h2>
                         <h2>{charity.state}</h2>
-                        <button onClick={()=>{this.like(charity, this.props.loggedUser)}} className="button is-primary">Like</button>
+                        {
+                          this.props.loggedUser.favorites.some(favorite => favorite == charity.name) ?
+                              <button onClick={()=>{this.dislike()}} className="button is-primary">Dislike</button>
+                            : <button onClick={()=>{this.like(charity, this.props.loggedUser)}} className="button is-primary">Like</button>
+                          }
                       </div>
                       )
                     }
