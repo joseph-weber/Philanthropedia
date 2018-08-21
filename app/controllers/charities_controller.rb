@@ -6,7 +6,7 @@ class CharitiesController < ApplicationController
   end
 
   def show
-    render json: Charity.find(params["id"])
+    render json: Charity.find(params["query"])
   end
 
 

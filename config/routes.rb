@@ -10,5 +10,7 @@ Rails.application.routes.draw do
 
   get '/charities/:query', to: 'charities#index'
 
+  get '/charities/find/:query', to: 'charities#show'
+
 
 end

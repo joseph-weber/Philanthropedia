@@ -7,7 +7,12 @@ class Charity extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.clearBoard = this.clearBoard.bind(this)
     this.like = this.like.bind(this)
+    this.dislike = this.dislike.bind(this)
+    this.getCharity = this.getCharity.bind(this)
   }
+    getCharity(query){
+      this.props.getCharity(query)
+    }
     like(charity, user){
       console.log('red')
       console.log(charity)
@@ -116,7 +121,7 @@ class Charity extends React.Component {
               {this.props.charities.map((charity, index) =>
                   {
                     return (
-                      <div className="charity">
+                      <div onClick={()=>{this.getCharity(charity.id)}} className="charity">
                         <h1>{charity.name}</h1>
                         <h2>{charity.street_address}</h2>
                         <h2>{charity.city}</h2>
