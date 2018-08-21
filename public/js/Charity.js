@@ -13,20 +13,17 @@ class Charity extends React.Component {
     getCharity(query){
       this.props.getCharity(query)
     }
+    dislike(user_id, charity_id){
+      this.props.removeLike(user_id, charity_id)
+    }
     like(charity, user){
-      console.log('red')
-      console.log(charity)
-      console.log(user)
       const new_like = {
         user_id: user.id,
         charity_id: charity.id,
         charity_name: charity.name
       }
-      console.log(new_like)
       this.props.createLike(new_like)
-    }
-    dislike(){
-      console.log('hello')
+      this.props.changePage('charitiesSearch')
     }
     clearBoard(){
       this.setState({
@@ -121,17 +118,21 @@ class Charity extends React.Component {
               {this.props.charities.map((charity, index) =>
                   {
                     return (
-                      <div onClick={()=>{this.getCharity(charity.id)}} className="charity">
-                        <h1>{charity.name}</h1>
-                        <h2>{charity.street_address}</h2>
-                        <h2>{charity.city}</h2>
-                        <h2>{charity.zip}</h2>
-                        <h2>{charity.state}</h2>
+                      <div className="charity">
+                        <div onClick={()=>{this.getCharity(charity.id)}}>
+                          <h1>{charity.name}</h1>
+                          <h2>{charity.street_address}</h2>
+                          <h2>{charity.city}</h2>
+                          <h2>{charity.zip}</h2>
+                          <h2>{charity.state}</h2>
+                        </div>
                         {
-                          this.props.loggedUser.favorites.some(favorite => favorite == charity.name) ?
-                              <button onClick={()=>{this.dislike()}} className="button is-primary">Dislike</button>
-                            : <button onClick={()=>{this.like(charity, this.props.loggedUser)}} className="button is-primary">Like</button>
-                          }
+                          this.props.loggedUser ?
+                            this.props.loggedUser.favorites.some(favorite => favorite.name == charity.name) ?
+                                <button onClick={()=>{this.dislike(this.props.loggedUser.id, charity.id)}} className="button is-primary">Dislike</button>
+                              : <button onClick={()=>{this.like(charity, this.props.loggedUser)}} className="button is-primary">Like</button>
+                          : ''
+                        }
                       </div>
                       )
                     }

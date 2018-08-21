@@ -11,7 +11,7 @@ class Nav extends React.Component {
         {
           this.props.currentUser != null ?
           <div>
-            <h1>{this.props.currentUser.username}</h1>
+            <h1 onClick={()=>{this.props.changePage('userShow')}}>{this.props.currentUser.username}</h1>
           </div>
         :
           <div>

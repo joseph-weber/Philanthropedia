@@ -143,12 +143,29 @@ form input {
 }
 
 .container {
+  margin: 20px auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 300px;
-  width: 300px;
+  min-height: 600px;
+  min-width: 600px;
   background: whitesmoke;
-  border-radius: 50%;
+  border-radius: 20%;
+}
+
+
+.container h1 {
+  padding-left: 10px 0;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.container h2 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.container h1 {
+  text-align: center;
 }

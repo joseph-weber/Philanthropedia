@@ -35,7 +35,10 @@ class User
     )
     favorites = []
     results.each do |result|
-      favorites.push(result["charity_name"])
+      favorites.push({
+        "name" => result["charity_name"],
+        "id" => result["charity_id"],
+      })
     end
     results = results.first
     return {

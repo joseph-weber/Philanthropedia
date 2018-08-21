@@ -5,6 +5,7 @@ class App extends React.Component {
       loggedUser: null,
       charities: false,
       charity: false,
+      currentQuery: null,
       lastFavorite: {},
       page: {
         userLogin: false,
@@ -24,6 +25,7 @@ class App extends React.Component {
     this.createLike = this.createLike.bind(this)
     this.register = this.register.bind(this)
     this.createUser= this.createUser.bind(this)
+    this.removeLike = this.removeLike.bind(this)
   }
   changePage (newPage) {
     let toUpdate = {};
@@ -61,6 +63,15 @@ class App extends React.Component {
       loggedUser: null
     })
   }
+  removeLike(user_id, charity_id){
+    fetch("/favorites/" + user_id + "/" + charity_id, {
+      method: "DELETE"
+    })
+    .then(data => {
+      this.changePage('charitiesSearch')
+    })
+    .catch(error => console.log(error));
+  }
   createLike(new_like){
     fetch("/favorites", {
       body: JSON.stringify(new_like),
@@ -76,6 +87,9 @@ class App extends React.Component {
   .catch(error => console.log(error))
   }
   getCharities(query) {
+    this.setState({
+      currentQuery: query
+    })
     fetch("/charities/" + query)
       .then(response => response.json())
         .then(query_charities => {
@@ -84,11 +98,13 @@ class App extends React.Component {
             charity: false
           })
         }).catch(error => this.setState({
-          charities: false
+          charities: false,
         }));
   }
   getCharity(query) {
-    console.log('hi')
+    this.setState({
+      currentQuery: query
+    })
     fetch("/charities/find/" + query)
       .then(response => response.json())
         .then(query_charity => {
@@ -96,7 +112,7 @@ class App extends React.Component {
             charity: query_charity
           })
         }).catch(error => this.setState({
-          charity: false
+          charity: false,
         }));
         this.changePage('charityShow')
   }
@@ -139,6 +155,8 @@ class App extends React.Component {
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              removeLike={this.removeLike}
+              changePage={this.changePage}
               getCharity={this.getCharity}
               loggedUser={this.state.loggedUser}
               createLike={this.createLike}
@@ -159,8 +177,18 @@ class App extends React.Component {
           ''
       }
       {
+        (this.state.page.userShow == true) ?
+          <UserShow
+            changePage={this.changePage}
+            loggedUser={this.state.loggedUser}
+          />
+        :
+          ''
+      }
+      {
           this.state.page.userRegister ?
             <UserForm
+              changePage={this.changePage}
               functionExecute={this.createUser}
               title="Register User"/>
           : ''
