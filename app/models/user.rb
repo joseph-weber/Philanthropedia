@@ -45,6 +45,7 @@ class User
       "id" => results["id"].to_i,
       "username" => results["username"],
       "password" => results["password"],
+      "admin" => results["admin"],
       "favorites" => favorites
     }
   end

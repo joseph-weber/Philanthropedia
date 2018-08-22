@@ -18,7 +18,17 @@ class Nav extends React.Component {
             <h1
             onClick={()=>this.props.changePage("userRegister")}>Register user</h1>
           </div>
-      }
+        }
+        {
+          this.props.currentUser ?
+          this.props.currentUser.admin ?
+          <div>
+            <h1>Update Crisis</h1>
+          </div>
+        :
+          ''
+          : ''
+        }
         {
           this.props.currentUser != null ?
           <div className="navright">
