@@ -7,13 +7,16 @@ class App extends React.Component {
       charity: false,
       currentQuery: null,
       lastFavorite: {},
+      query1: null,
+      query2: null,
       page: {
         userLogin: false,
         userRegister: false,
         userShow: false,
         userEdit: false,
         charitiesSearch: true,
-        charityShow: false
+        charityShow: false,
+        crisis: false
       }
     }
     this.getCharities = this.getCharities.bind(this)
@@ -160,9 +163,17 @@ class App extends React.Component {
           charity={this.state.charity}/>
           : ''
         }
+        {this.state.page.crisis ?
+          <Crisis
+          changePage={this.changePage}/>
+          :
+          ''
+        }
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              crisis1={this.state.crisis1}
+              crisis2={this.state.crisis2}
               clearBoard={this.clearBoard}
               removeLike={this.removeLike}
               changePage={this.changePage}

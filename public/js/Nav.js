@@ -23,7 +23,8 @@ class Nav extends React.Component {
           this.props.currentUser ?
           this.props.currentUser.admin ?
           <div>
-            <h1>Update Crisis</h1>
+            <h1
+            onClick={()=>{this.props.changePage('crisis')}}>Update Crisis</h1>
           </div>
         :
           ''

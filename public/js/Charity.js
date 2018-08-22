@@ -111,7 +111,7 @@ class Charity extends React.Component {
         :
         ''
     }
-      {this.state.showBoard && this.props.charities ?
+      {this.props.charities ?
         <div>
           {this.props.charities.length != 0 ?
               <div className="charities">
@@ -142,6 +142,7 @@ class Charity extends React.Component {
               <h1>No results match your search</h1>
             </div>
           }
+
         </div>
       : ''
     }
