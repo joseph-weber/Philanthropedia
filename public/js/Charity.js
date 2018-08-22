@@ -5,7 +5,6 @@ class Charity extends React.Component {
       showBoard: false
     }
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.clearBoard = this.clearBoard.bind(this)
     this.like = this.like.bind(this)
     this.dislike = this.dislike.bind(this)
     this.getCharity = this.getCharity.bind(this)
@@ -24,12 +23,6 @@ class Charity extends React.Component {
       }
       this.props.createLike(new_like)
       this.props.changePage('charitiesSearch')
-    }
-    clearBoard(){
-      this.setState({
-        showBoard: false
-      })
-      console.log(this.state.showBoard)
     }
     handleSubmit(event){
       event.preventDefault();
@@ -99,17 +92,24 @@ class Charity extends React.Component {
           <input className="button is-primary" type="submit" value="submit answer"/>
         </form>
         {this.props.charities && this.props.charities.length != 0 ?
-        <button className="button is-primary" onClick={()=>{this.clearBoard()}}>Clear</button>
+        <button className="button is-primary" onClick={()=>{this.props.clearBoard()}}>Clear</button>
         : ''
       }
       </div>
       :
     ''
   }
-      {this.props.charities == null ?
-      <div className="result">No results matched your search</div>
-    :
-      <div className="result">Your results are below</div>
+    {
+      this.props.charities.length < 1 ?
+        <div className="result">No results matched your search</div>
+        :
+        ''
+    }
+    {
+      this.props.charities.length > 0 ?
+        <div className="result">Your results are below</div>
+        :
+        ''
     }
       {this.state.showBoard && this.props.charities ?
         <div>

@@ -26,6 +26,7 @@ class App extends React.Component {
     this.register = this.register.bind(this)
     this.createUser= this.createUser.bind(this)
     this.removeLike = this.removeLike.bind(this)
+    this.clearBoard = this.clearBoard.bind(this)
   }
   changePage (newPage) {
     let toUpdate = {};
@@ -34,6 +35,13 @@ class App extends React.Component {
     }
     toUpdate[newPage] = true;
     this.setState({page: toUpdate })
+  }
+  clearBoard(){
+    this.setState({
+      showBoard: false,
+      charities: false
+    })
+    console.log(this.state.showBoard)
   }
   createUser(new_user){
     // console.log("Creating new User");
@@ -155,6 +163,7 @@ class App extends React.Component {
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              clearBoard={this.clearBoard}
               removeLike={this.removeLike}
               changePage={this.changePage}
               getCharity={this.getCharity}
