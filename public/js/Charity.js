@@ -14,6 +14,7 @@ class Charity extends React.Component {
     }
     dislike(user_id, charity_id){
       this.props.removeLike(user_id, charity_id)
+      this.props.disliked(charity_id)
     }
     like(charity, user){
       const new_like = {
@@ -21,8 +22,14 @@ class Charity extends React.Component {
         charity_id: charity.id,
         charity_name: charity.name
       }
+      console.log(new_like)
+      const new_liked = {
+      id: charity.id,
+      charity_name: charity.name
+      }
       this.props.createLike(new_like)
       this.props.changePage('charitiesSearch')
+      this.props.liked(new_liked)
     }
     handleSubmit(event){
       event.preventDefault();
@@ -121,10 +128,11 @@ class Charity extends React.Component {
                       <div className="charity">
                         <div onClick={()=>{this.getCharity(charity.id)}}>
                           <h1>{charity.name}</h1>
-                          <h2>{charity.street_address}</h2>
-                          <h2>{charity.city}</h2>
-                          <h2>{charity.zip}</h2>
-                          <h2>{charity.state}</h2>
+                          <h2>Address:</h2>
+                          <h3>{charity.street_address}</h3>
+                          <h3>{charity.city}</h3>
+                          <h3>{charity.zip}</h3>
+                          <h3>{charity.state}</h3>
                         </div>
                         {
                           this.props.loggedUser ?

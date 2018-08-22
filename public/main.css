@@ -110,6 +110,17 @@ form input {
   text-align: center;
   margin: 20px auto;
   border-radius: 30px;
+  border: 3px solid black;
+}
+
+.charity h1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.charity h2 {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .result {
@@ -127,6 +138,36 @@ form input {
   margin-top: 10%;
 }
 
+.crisisFormPage {
+  height: 1000px;
+  background-color: #333333;;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.crisisForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 500px;
+  background: whitesmoke;
+  border-radius: 50%;
+}
+
+.crisisForm input {
+  width: 50%;
+  margin-top: 20px;
+}
+
+
+.crisisForm select {
+  width: 50%;
+  margin-top: 20px;
+}
+
 .userform {
   display: flex;
   flex-direction: column;
@@ -139,6 +180,11 @@ form input {
 }
 
 .userform input {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.userform select {
   width: 50%;
   margin-top: 20px;
 }

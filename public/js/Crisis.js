@@ -46,7 +46,7 @@ class Crisis extends React.Component {
     return(
       <div className="crisisFormPage">
         <form className="crisisForm" onSubmit={this.handleSubmit}>
-        <h1>Enter User Info Below</h1>
+        <h1>Enter Crisis Info Below</h1>
           <input className="input is-primary" ref="zip" type="number" placeholder="zip"/>
           <input className="input is-primary" ref="city" type="text" placeholder="city"/>
           <input className="input is-primary" ref="state" type="text" placeholder="state"/>

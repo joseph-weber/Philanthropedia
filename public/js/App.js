@@ -7,6 +7,7 @@ class App extends React.Component {
       charity: false,
       currentQuery: null,
       lastFavorite: {},
+      page: null,
       query1: null,
       query2: null,
       page: {
@@ -30,6 +31,8 @@ class App extends React.Component {
     this.createUser= this.createUser.bind(this)
     this.removeLike = this.removeLike.bind(this)
     this.clearBoard = this.clearBoard.bind(this)
+    this.disliked = this.disliked.bind(this)
+    this.liked = this.liked.bind(this)
   }
   changePage (newPage) {
     let toUpdate = {};
@@ -96,6 +99,33 @@ class App extends React.Component {
       this.changePage('charitiesSearch')
     })
     .catch(error => console.log(error));
+  }
+  disliked(charity_id){
+      let new_charity_id = parseInt(charity_id, 10);
+      console.log(new_charity_id)
+      const new_loggedUser = this.state.loggedUser
+      new_loggedUser.favorites.map((val, index) =>{
+        console.log(val['id'])
+         if(val['id'] == new_charity_id){
+           console.log(val)
+           console.log('it works')
+           new_loggedUser.favorites.splice(index, 1)
+           console.log(new_loggedUser.favorites)
+           this.setState({
+             loggedUser: new_loggedUser
+           })
+         }
+      })
+  }
+  liked(charity){
+      const new_loggedUser = this.state.loggedUser
+      new_loggedUser.favorites.push(charity)
+      console.log(new_loggedUser)
+
+      this.setState({
+        loggedUser: new_loggedUser
+       })
+       this.changePage('charitiesSearch')
   }
   createLike(new_like){
     fetch("/favorites", {
@@ -187,6 +217,8 @@ class App extends React.Component {
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              liked={this.liked}
+              disliked={this.disliked}
               crisis1={this.state.crisis1}
               crisis2={this.state.crisis2}
               clearBoard={this.clearBoard}

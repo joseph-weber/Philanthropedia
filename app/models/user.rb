@@ -40,6 +40,7 @@ class User
         "id" => result["charity_id"],
       })
     end
+    favorites = favorites.uniq
     results = results.first
     return {
       "id" => results["id"].to_i,
