@@ -66,6 +66,20 @@ class App extends React.Component {
     })
     .catch(error => console.log(error));
   }
+  createCrisis(new_crisis){
+    fetch("/crises", {
+      body: JSON.stringify(new_crisis),
+      method: "POST",
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(createdCrisis => {
+      return createdCrisis.json()
+    })
+    .catch(error => console.log(error));
+  }
   register(){
     console.log('come and register')
   }
@@ -165,6 +179,7 @@ class App extends React.Component {
         }
         {this.state.page.crisis ?
           <Crisis
+          functionExecute={this.createCrisis}
           changePage={this.changePage}/>
           :
           ''

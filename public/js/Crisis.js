@@ -34,6 +34,13 @@ class Crisis extends React.Component {
       const query = category + zip + city + state
       console.log(query)
     this.props.changePage('charitiesSearch')
+    const new_crisis = {
+      zip: this.refs.zip.value,
+      city: this.refs.city.value,
+      state: this.refs.state.value,
+      category: this.refs.category.value
+    }
+    this.props.functionExecute(new_crisis)
   }
   render(){
     return(

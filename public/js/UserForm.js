@@ -5,7 +5,6 @@ class UserForm extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault();
-    console.log('mogli')
     const new_user = {
     user_name: this.refs.username.value,
     password: this.refs.password.value
