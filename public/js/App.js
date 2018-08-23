@@ -90,6 +90,9 @@ class App extends React.Component {
     this.setState({
       loggedUser: null
     })
+    if(this.state.page.userShow == true){
+      this.changePage('charitiesSearch')
+    }
   }
   removeLike(user_id, charity_id){
     fetch("/favorites/" + user_id + "/" + charity_id, {
@@ -214,15 +217,17 @@ class App extends React.Component {
           changePage={this.changePage}
           openLoginForm={this.login}
           logOut={this.logOut}
-          currentUser={this.state.loggedUser}
+          loggedUser={this.state.loggedUser}
         />
         {this.state.page.charityShow ?
           <CharityShow
+          loggedUser={this.state.loggedUser}
           charity={this.state.charity}/>
           : ''
         }
         {this.state.page.crisis ?
           <Crisis
+          loggedUser={this.state.loggedUser}
           functionExecute={this.createCrisis}
           changePage={this.changePage}/>
           :
@@ -260,6 +265,7 @@ class App extends React.Component {
       {
         (this.state.page.userShow == true) ?
           <UserShow
+            loggedUser={this.state.loggedUser}
             getCharity={this.getCharity}
             changePage={this.changePage}
             loggedUser={this.state.loggedUser}
@@ -270,6 +276,7 @@ class App extends React.Component {
       {
           this.state.page.userRegister ?
             <UserForm
+              loggedUser={this.state.loggedUser}
               changePage={this.changePage}
               functionExecute={this.createUser}
               title="Register User"/>

@@ -9,9 +9,9 @@ class Nav extends React.Component {
           <h1 onClick={()=>{this.props.changePage('charitiesSearch')}}><img src="p3.png"/>hilathropedia</h1>
         </div>
         {
-          this.props.currentUser != null ?
+          this.props.loggedUser != null ?
           <div>
-            <h1 onClick={()=>{this.props.changePage('userShow')}}>{this.props.currentUser.username}</h1>
+            <h1 onClick={()=>{this.props.changePage('userShow')}}>{this.props.loggedUser.username}</h1>
           </div>
         :
           <div>
@@ -20,8 +20,8 @@ class Nav extends React.Component {
           </div>
         }
         {
-          this.props.currentUser ?
-          this.props.currentUser.admin ?
+          this.props.loggedUser ?
+          this.props.loggedUser.admin ?
           <div>
             <h1
             onClick={()=>{this.props.changePage('crisis')}}>Update Crisis</h1>
@@ -31,7 +31,7 @@ class Nav extends React.Component {
           : ''
         }
         {
-          this.props.currentUser != null ?
+          this.props.loggedUser != null ?
           <div className="navright">
             <h1 onClick={()=>{this.props.logOut()}}>logOut</h1>
           </div>
