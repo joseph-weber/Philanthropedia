@@ -24,12 +24,11 @@ class CharitySearch extends React.Component {
     } else {
       state = ''
     }
-    if(this.refs.category){
-      if(this.refs.category > 0){
+      if(this.refs.category.value > 0){
         category = '&categoryID=' + this.refs.category.value
+        console.log(category)
       } else {
          category = ''
-      }
       }
     const query = category + zip + city + state
     console.log(query)

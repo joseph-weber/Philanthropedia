@@ -1,13 +1,14 @@
 class App extends React.Component {
   constructor(props){
     super(props);
+    /// This.state
     this.state = {
       loggedUser: null,
       charities: false,
       charity: false,
       currentQuery: null,
       lastFavorite: {},
-      page: null,
+      currentPage: 1,
       query1: null,
       query2: null,
       page: {
@@ -20,6 +21,7 @@ class App extends React.Component {
         crisis: false
       }
     }
+    /// Binding of functions to access this within
     this.getCharities = this.getCharities.bind(this)
     this.getCharity = this.getCharity.bind(this)
     this.setUser = this.setUser.bind(this)
@@ -27,13 +29,42 @@ class App extends React.Component {
     this.changePage = this.changePage.bind(this)
     this.logOut = this.logOut.bind(this)
     this.createLike = this.createLike.bind(this)
-    this.register = this.register.bind(this)
     this.createUser= this.createUser.bind(this)
     this.removeLike = this.removeLike.bind(this)
     this.clearBoard = this.clearBoard.bind(this)
     this.disliked = this.disliked.bind(this)
     this.liked = this.liked.bind(this)
+    this.pageChange = this.pageChange.bind(this)
+    this.pageQuery = this.pageQuery.bind(this)
   }
+  /// Function allows for pagination
+  pageChange(direction){
+    let new_page = this.state.currentPage
+    if(direction === 'next'){
+      new_page += 1
+      this.setState({
+        currentPage: new_page
+      })
+    } else if(direction === 'last'){
+      new_page -= 1
+      this.setState({
+        currentPage: new_page
+      })
+    }
+    setTimeout(
+    function() {
+        this.pageQuery()
+    }
+    .bind(this),
+    500
+  );
+  }
+  /// Setting up a new query based on the page change
+  pageQuery(){
+    let query = this.state.currentQuery + '&pageNum=' + this.state.currentPage
+    this.getCharities(query)
+  }
+  /// Changes the view for the user based on what part of the app they wish to visit
   changePage (newPage) {
     let toUpdate = {};
     for(let key in this.state.page){
@@ -42,6 +73,7 @@ class App extends React.Component {
     toUpdate[newPage] = true;
     this.setState({page: toUpdate })
   }
+  /// Clears charities off of the index page
   clearBoard(){
     this.setState({
       showBoard: false,
@@ -49,9 +81,8 @@ class App extends React.Component {
     })
     console.log(this.state.showBoard)
   }
+  /// function to register a new user to the site
   createUser(new_user){
-    // console.log("Creating new User");
-    // console.log(new_user);
     fetch("/users", {
       body: JSON.stringify(new_user),
       method: "POST",
@@ -69,6 +100,7 @@ class App extends React.Component {
     })
     .catch(error => console.log(error));
   }
+  /// Admin only function for update crises table
   createCrisis(new_crisis){
     fetch("/crises", {
       body: JSON.stringify(new_crisis),
@@ -83,9 +115,7 @@ class App extends React.Component {
     })
     .catch(error => console.log(error));
   }
-  register(){
-    console.log('come and register')
-  }
+  /// logOut function
   logOut(){
     this.setState({
       loggedUser: null
@@ -94,6 +124,7 @@ class App extends React.Component {
       this.changePage('charitiesSearch')
     }
   }
+  /// connects to route for removing a like
   removeLike(user_id, charity_id){
     fetch("/favorites/" + user_id + "/" + charity_id, {
       method: "DELETE"
@@ -103,6 +134,7 @@ class App extends React.Component {
     })
     .catch(error => console.log(error));
   }
+  /// removes disliked charity from this.state
   disliked(charity_id){
       let new_charity_id = parseInt(charity_id, 10);
       console.log(new_charity_id)
@@ -120,16 +152,20 @@ class App extends React.Component {
          }
       })
   }
+  /// adds a liked charity to this.state
   liked(charity){
+    this.render()
       const new_loggedUser = this.state.loggedUser
+      if(charity.id){
       new_loggedUser.favorites.push(charity)
+    }
       console.log(new_loggedUser)
-
       this.setState({
         loggedUser: new_loggedUser
        })
        this.changePage('charitiesSearch')
   }
+  /// request to the create like route
   createLike(new_like){
     fetch("/favorites", {
       body: JSON.stringify(new_like),
@@ -144,21 +180,35 @@ class App extends React.Component {
   })
   .catch(error => console.log(error))
   }
+  /// Function to send a request to the API for charities
   getCharities(query) {
+    if(!query.includes('&pageNum=')){
     this.setState({
       currentQuery: query
     })
+  }
     fetch("/charities/" + query)
-      .then(response => response.json())
+      .then(response =>{
+        console.log('response')
+        console.log(response)
+        return response.json()
+      })
         .then(query_charities => {
+          if(query_charities == null){
+            this.setState({
+              charities: [],
+            })
+          } else {
           this.setState({
             charities: query_charities,
             charity: false
           })
+        }
         }).catch(error => this.setState({
-          charities: false,
+          charities: [],
         }));
   }
+  /// Request to the API to set up charity show page
   getCharity(query) {
     query = query.split('')
     console.log(query)
@@ -188,12 +238,14 @@ class App extends React.Component {
       500
   );
   }
+  /// Sets user from logIn
   setUser(new_user){
     if(new_user != null){
       new_user["password"] = "Nice Try";
     }
     this.setState({loggedUser: new_user});
   }
+  /// User find route request
   loginUser(new_user){
     console.log(new_user)
     fetch("/users/find/'" + new_user.user_name + "'")
@@ -236,6 +288,7 @@ class App extends React.Component {
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              pageChange={this.pageChange}
               liked={this.liked}
               disliked={this.disliked}
               crisis1={this.state.crisis1}

@@ -216,3 +216,8 @@ form input {
 .container h1 {
   text-align: center;
 }
+
+.paginationButton {
+  display: flex;
+  justify-content: center;
+}

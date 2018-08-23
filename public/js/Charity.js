@@ -8,7 +8,16 @@ class Charity extends React.Component {
     this.like = this.like.bind(this)
     this.dislike = this.dislike.bind(this)
     this.getCharity = this.getCharity.bind(this)
+    this.pageChange = this.pageChange.bind(this)
   }
+    pageChange(direction){
+      this.props.pageChange(direction)
+    }
+    componentDidMount(prevProps){
+      console.log('prevProps')
+      console.log(prevProps)
+      console.log('prevProps')
+    }
     getCharity(query){
       this.props.getCharity(query)
     }
@@ -17,6 +26,7 @@ class Charity extends React.Component {
       this.props.disliked(charity_id)
     }
     like(charity, user){
+      console.log(this.props.loggedUser.favorites)
       const new_like = {
         user_id: user.id,
         charity_id: charity.id,
@@ -25,7 +35,7 @@ class Charity extends React.Component {
       console.log(new_like)
       const new_liked = {
       id: charity.id,
-      charity_name: charity.name
+      name: charity.name
       }
       this.props.createLike(new_like)
       this.props.changePage('charitiesSearch')
@@ -100,7 +110,8 @@ class Charity extends React.Component {
               <h1>No results match your search</h1>
             </div>
           }
-
+        <PaginationButtons
+        pageChange = {this.props.pageChange} />
         </div>
       : ''
     }
