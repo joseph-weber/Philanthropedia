@@ -1,0 +1,223 @@
+body {
+  max-width: 1500px;
+  display: flex;
+  flex-direction: column;
+  background-color: #333333;
+  font-family: 'Playfair Display', serif;
+}
+
+.charities {
+  display: flex;
+  flex-flow: wrap;
+}
+
+.charity {
+  /* width: 500px;
+  height: auto;
+  border: 1px solid black;
+  background-color: red; */
+}
+
+div {
+  /* border: 1px solid gold; */
+}
+
+.clear {
+  text-align: center
+}
+
+.bigText {
+  color: whitesmoke;
+  text-align: center;
+  font-size: 50px;
+}
+
+.form {
+    max-width: 500px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 50%;
+    background: whitesmoke;
+    box-shadow: 0 0 10px rgb(96,96,96);
+    justify-content: center;
+    align-items: center;
+    margin: 50px auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.form h1 {
+  font-size: 20px;
+}
+
+form input {
+  background: grey;
+}
+
+.form input {
+  width: 75%;
+  height: 40px;
+  margin: 20px;
+}
+
+.nav {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.nav div {
+  text-align: center;
+  width: 150px;
+}
+
+.nav h1 {
+  text-align: center;
+  font-weight: 800;
+}
+
+
+.navright h1 {
+  text-align: right;
+}
+
+.footer {
+  background-color: whitesmoke;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.footer h1 {
+  text-align: center;
+}
+
+.nav img {
+  width: 50px;
+  height: 50px;
+}
+
+.charity {
+  width: 40%;
+  background-color: whitesmoke;
+  text-align: center;
+  margin: 20px auto;
+  border-radius: 30px;
+  border: 3px solid black;
+}
+
+.charity h1 {
+  font-size: 30px;
+  font-weight: 800;
+}
+
+.charity h2 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.result {
+  width: 100%;
+  text-align: center;
+  color: whitesmoke;
+}
+
+
+.userformPage {
+  height: 1000px;
+  background-color: #333333;;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.crisisFormPage {
+  height: 1000px;
+  background-color: #333333;;
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.crisisForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 500px;
+  background: whitesmoke;
+  border-radius: 50%;
+}
+
+.crisisForm input {
+  width: 50%;
+  margin-top: 20px;
+}
+
+
+.crisisForm select {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.userform {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  width: 300px;
+  background: whitesmoke;
+  border-radius: 50%;
+}
+
+.userform input {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.userform select {
+  width: 50%;
+  margin-top: 20px;
+}
+
+.container {
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 600px;
+  min-width: 600px;
+  background: whitesmoke;
+  border-radius: 20%;
+}
+
+
+.container h1 {
+  padding-left: 10px 0;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.container h2 {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.container h1 {
+  text-align: center;
+}
+
+.paginationButton {
+  display: flex;
+  justify-content: center;
+}
