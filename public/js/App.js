@@ -246,6 +246,7 @@ class App extends React.Component {
       {
         (this.state.page.userShow == true) ?
           <UserShow
+            getCharity={this.getCharity}
             changePage={this.changePage}
             loggedUser={this.state.loggedUser}
           />
