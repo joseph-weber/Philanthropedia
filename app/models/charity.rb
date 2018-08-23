@@ -7,7 +7,7 @@ class Charity
   require 'net/http'
 
   def self.all(query)
-  response = Net::HTTP.get_response(URI.parse('http://api.data.charitynavigator.org/v2/Organizations?app_id=' + ENV["APP_ID"] + '&app_key=' + ENV["API_KEY"] + '&pageSize=20' + query))
+  response = Net::HTTP.get_response(URI.parse('https://api.data.charitynavigator.org/v2/Organizations?app_id=' + ENV["APP_ID"] + '&app_key=' + ENV["API_KEY"] + '&pageSize=20' + query))
   response = response.body
   puts 'this is response'
   p response
