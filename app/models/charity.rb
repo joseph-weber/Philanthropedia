@@ -9,9 +9,6 @@ class Charity
   def self.all(query)
   response = Net::HTTP.get_response(URI.parse('https://api.data.charitynavigator.org/v2/Organizations?app_id=' + ENV["APP_ID"] + '&app_key=' + ENV["API_KEY"] + '&pageSize=20' + query))
   response = response.body
-  puts 'this is response'
-  p response
-  # response = open('https://api.data.charitynavigator.org/v2/Organizations?app_id=5e7394b6&app_key=67367d4cf86198c5bdaf14378279e1e1' + query + '&categoryID=1').read
   if response != "{\"errorMessage\":\"No organizations match your requirements\"}"
     response = JSON.parse(response)
     puts 'not panic mode'
