@@ -157,6 +157,14 @@ class App extends React.Component {
         }));
   }
   getCharity(query) {
+    query = query.split('')
+    console.log(query)
+    while(query.length < 9){
+      query.unshift('0')
+    }
+    query = query.join('')
+    console.log(query)
+    console.log(query)
     this.setState({
       currentQuery: query
     })
@@ -169,7 +177,13 @@ class App extends React.Component {
         }).catch(error => this.setState({
           charity: false,
         }));
-        this.changePage('charityShow')
+        setTimeout(
+      function() {
+          this.changePage('charityShow');
+      }
+      .bind(this),
+      500
+  );
   }
   setUser(new_user){
     if(new_user != null){
