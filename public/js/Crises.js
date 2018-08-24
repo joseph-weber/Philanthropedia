@@ -48,10 +48,26 @@ class Crises extends React.Component {
           {
             return (
             <div onClick={()=>{this.getCharities(crisis.city, crisis.zip, crisis.state, crisis.category)}} className="crisis">
+            {crisis.crisis_name ?
+              <h1>{crisis.crisis_name}</h1>
+              :
+              ''
+            }
+            {crisis.city ?
               <h1>{crisis.city}</h1>
+              :
+              ''
+            }
+            {crisis.zip ?
               <h1>{crisis.zip}</h1>
+              :
+              ''
+            }
+            {crisis.state ?
               <h1>{crisis.state}</h1>
-              <h1>{crisis.category}</h1>
+              :
+              ''
+            }
             </div>
             )
           }

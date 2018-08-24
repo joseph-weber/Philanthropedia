@@ -114,8 +114,13 @@ class Charity extends React.Component {
         </div>
       : ''
     }
-    <h1
-    onClick={()=>{this.props.changePage('crises')}}>hi</h1>
+    <div className="crisisButton">
+      <h1
+      className="button is-large is-danger"
+      onClick={()=>{this.props.changePage('crises')}}>
+      Current Crises. Click here to help.
+      </h1>
+      </div>
 
     </div>
   )
