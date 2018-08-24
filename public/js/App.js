@@ -39,6 +39,7 @@ class App extends React.Component {
     this.pageChange = this.pageChange.bind(this)
     this.pageQuery = this.pageQuery.bind(this)
     this.loadCrises = this.loadCrises.bind(this)
+    this.createCrisis=this.createCrisis.bind(this)
   }
   /// Function allows for pagination
   pageChange(direction){
@@ -114,9 +115,12 @@ class App extends React.Component {
       }
     })
     .then(createdCrisis => {
+      console.log('createdCrisis')
+      console.log(createdCrisis)
       return createdCrisis.json()
     })
     .catch(error => console.log(error));
+    this.loadCrises()
   }
   /// logOut function
   logOut(){

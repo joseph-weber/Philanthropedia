@@ -17,6 +17,8 @@ def self.all
   results.each do |result|
     {
       "id" => result["id"].to_i,
+      "zip" => result["zip"].to_i,
+      "crisis_name" => result["crisis_name"],
       "state" => result["username"],
       "category" => result["category"]
     }
@@ -28,13 +30,14 @@ end
     results = DB.exec(
       <<-SQL
       INSERT INTO
-        crises  (zip, city, state, category)
-      VALUES (#{opts["zip"]}, '#{opts["city"]}', '#{opts["state"]}', #{opts["category"]})
-      RETURNING id, zip, city, state, category;
+        crises  (crisis_name, zip, city, state, category)
+      VALUES ('#{opts["crisis_name"]}', #{opts["zip"]}, '#{opts["city"]}', '#{opts["state"]}', #{opts["category"]})
+      RETURNING id, crisis_name, zip, city, state, category;
     SQL
   )
   return {
     "id" => results.first["id"].to_i,
+    "crisis_name" => results.first["crisis_name"],
     "zip" => results.first["zip"].to_i,
     "city" => results.first["city"],
     "state" => results.first["state"],

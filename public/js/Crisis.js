@@ -5,10 +5,14 @@ class Crisis extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault();
+    let name;
     let zip;
     let city;
     let state;
     let category;
+    if(this.refs.name){
+      name = this.refs.name.value
+    }
     if(this.refs.zip){
       zip = '&zip=' + this.refs.zip.value
     } else {
@@ -35,6 +39,7 @@ class Crisis extends React.Component {
       console.log(query)
     this.props.changePage('charitiesSearch')
     const new_crisis = {
+      crisis_name: this.refs.name.value,
       zip: this.refs.zip.value,
       city: this.refs.city.value,
       state: this.refs.state.value,
@@ -47,6 +52,7 @@ class Crisis extends React.Component {
       <div className="crisisFormPage">
         <form className="crisisForm" onSubmit={this.handleSubmit}>
         <h1>Enter Crisis Info Below</h1>
+          <input className="input is-primary" ref="name" type="text" placeholder="name"/>
           <input className="input is-primary" ref="zip" type="number" placeholder="zip"/>
           <input className="input is-primary" ref="city" type="text" placeholder="city"/>
           <input className="input is-primary" ref="state" type="text" placeholder="state"/>
