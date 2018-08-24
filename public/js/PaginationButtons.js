@@ -13,8 +13,20 @@ class PaginationButtons extends React.Component {
   render(){
     return (
       <div className="paginationButton">
-        <button onClick={()=>{this.lastPage()}}>Last</button>
-        <button onClick={()=>{this.nextPage()}}>Next</button>
+        {this.props.page == 1 ?
+          ''
+          :
+        <button
+        className="button is-danger" onClick={()=>{this.lastPage()}}>Last</button>
+      }
+      {this.props.charities.length != 0 ?
+        <div>
+          <button
+          className="button is-primary" onClick={()=>{this.nextPage()}}>Next</button>
+        </div>
+        :
+        ''
+        }
       </div>
     )
   }

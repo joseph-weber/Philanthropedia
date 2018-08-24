@@ -57,7 +57,7 @@ class CharitySearch extends React.Component {
             <option value="10">Community Devlopment</option>
             <option value="11">Research & Public Policy</option>
           </select>
-          <input className="button is-primary" type="submit" value="submit answer"/>
+          <input className="button is-primary" type="submit" value="submit"/>
         </form>
         {this.props.charities && this.props.charities.length != 0 ?
         <button className="button is-primary" onClick={()=>{this.props.clearBoard()}}>Clear</button>

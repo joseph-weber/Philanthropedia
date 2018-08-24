@@ -214,3 +214,7 @@ form input {
   display: flex;
   justify-content: center;
 }
+
+.paginationButton button {
+  margin: 10px;
+}

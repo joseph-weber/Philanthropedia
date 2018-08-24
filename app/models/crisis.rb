@@ -10,6 +10,8 @@ def self.all
   results = DB.exec(
     <<-SQL
     SELECT * FROM crises
+    ORDER BY id DESC
+    LIMIT 2
     SQL
   )
   results.each do |result|

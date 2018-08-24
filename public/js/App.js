@@ -11,6 +11,7 @@ class App extends React.Component {
       currentPage: 1,
       query1: null,
       query2: null,
+      crises: null,
       page: {
         userLogin: false,
         userRegister: false,
@@ -36,6 +37,7 @@ class App extends React.Component {
     this.liked = this.liked.bind(this)
     this.pageChange = this.pageChange.bind(this)
     this.pageQuery = this.pageQuery.bind(this)
+    this.loadCrises = this.loadCrises.bind(this)
   }
   /// Function allows for pagination
   pageChange(direction){
@@ -262,6 +264,15 @@ class App extends React.Component {
         });
         this.changePage('charitiesSearch')
   }
+  loadCrises() {
+    fetch("/crises")
+      .then(response => response.json())
+        .then(all_crises => {
+          // console.log(all_posts);
+            this.setState({crises: all_crises})
+        }).catch(error => console.log(error));
+  }
+
   render(){
     return (
     <div>
@@ -270,6 +281,9 @@ class App extends React.Component {
           openLoginForm={this.login}
           logOut={this.logOut}
           loggedUser={this.state.loggedUser}
+        />
+        <Crises
+        loadCrises={this.loadCrises}
         />
         {this.state.page.charityShow ?
           <CharityShow
@@ -288,6 +302,7 @@ class App extends React.Component {
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              page={this.state.currentPage}
               pageChange={this.pageChange}
               liked={this.liked}
               disliked={this.disliked}
