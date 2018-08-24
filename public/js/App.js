@@ -19,7 +19,8 @@ class App extends React.Component {
         userEdit: false,
         charitiesSearch: true,
         charityShow: false,
-        crisis: false
+        crisis: false,
+        crises: false
       }
     }
     /// Binding of functions to access this within
@@ -282,9 +283,16 @@ class App extends React.Component {
           logOut={this.logOut}
           loggedUser={this.state.loggedUser}
         />
-        <Crises
-        loadCrises={this.loadCrises}
-        />
+        {this.state.page.crises ?
+          <Crises
+          getCharities={this.getCharities}
+          loadCrises={this.loadCrises}
+          crises={this.state.crises}
+          changePage={this.changePage}
+          />
+        :
+        ''
+        }
         {this.state.page.charityShow ?
           <CharityShow
           loggedUser={this.state.loggedUser}
@@ -302,6 +310,7 @@ class App extends React.Component {
         {
           (this.state.page.charitiesSearch == true) ?
             <Charity
+              crises={this.state.crises}
               page={this.state.currentPage}
               pageChange={this.pageChange}
               liked={this.liked}

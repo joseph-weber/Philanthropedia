@@ -1,9 +1,31 @@
+html{
+  height: 100%;
+  position: relative;
+}
+
 body {
-  max-width: 1500px;
+  max-width: 3000px;
+  top:0;
+  bottom:0;
+  min-height: 100%;
+  left:0;
+  right:0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   background-color: #333333;
   font-family: 'Playfair Display', serif;
+}
+
+
+@media screen and (max-width: 1060px) {
+    #primary { width:67%; }
+    #secondary { width:30%; margin-left:3%;}
+}
+/* Tabled Portrait */
+@media screen and (max-width: 768px) {
+    #primary { width:100%; }
+    #secondary { width:100%; margin:0; border:none; }
 }
 
 .charities {
@@ -81,6 +103,9 @@ form input {
 }
 
 .footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
   background-color: whitesmoke;
   display: flex;
   justify-content: space-between;
@@ -124,7 +149,7 @@ form input {
 
 
 .userformPage {
-  height: 1000px;
+  height: auto;
   background-color: #333333;;
   display: flex;
   justify-content: center;
@@ -132,7 +157,7 @@ form input {
 }
 
 .crisisFormPage {
-  height: 1000px;
+  height: auto;
   background-color: #333333;;
   display: flex;
   justify-content: center;
@@ -188,8 +213,7 @@ form input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 600px;
-  min-width: 600px;
+  min-width: 60%;
   background: whitesmoke;
   border-radius: 20%;
 }
@@ -217,4 +241,21 @@ form input {
 
 .paginationButton button {
   margin: 10px;
+}
+
+.crises {
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+
+.crisis {
+  border: 2px solid #333333;
+  background-color: whitesmoke;
+  margin: 4px 0;
+  text-align: center;
+  width: 40%;
+  border-radius: 20px;
 }
