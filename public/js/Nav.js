@@ -8,7 +8,7 @@ class Nav extends React.Component {
       {/* Nav Bar */}
       {/* Logo that also returns user home */}
         <div>
-          <h1 onClick={()=>{this.props.changePage('charitiesSearch')}}><img src="p3.png"/>hilathropedia</h1>
+          <h1 onClick={()=>{this.props.changePage('charitiesSearch'); this.props.clearBoard()}}><img src="p3.png"/>hilathropedia</h1>
         </div>
         {/* Ternary for if the user is logged in or not */}
         {

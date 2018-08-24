@@ -282,6 +282,7 @@ class App extends React.Component {
     return (
     <div>
         <Nav
+          clearBoard={this.clearBoard}
           changePage={this.changePage}
           openLoginForm={this.login}
           logOut={this.logOut}
