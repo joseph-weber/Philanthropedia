@@ -16,8 +16,8 @@ class Footer extends React.Component {
           <h1>A Joseph Weber Joint</h1>
         </div>
         <div>
-          <h1>Made with Love</h1>
-          <h1>CV</h1>
+        <h1>Data Provided By:</h1>
+          <a href="https://www.CharityNavigator.org">Charity Navigator</a>
         </div>
       </div>
     )
