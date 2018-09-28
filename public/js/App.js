@@ -214,7 +214,7 @@ class App extends React.Component {
         }).catch(error => this.setState({
           charities: [],
         }));
-      window.scrollTo(0, 500);
+      window.To(0, 500);
   }
   /// Request to the API to set up charity show page
   getCharity(query) {
@@ -238,6 +238,7 @@ class App extends React.Component {
         setTimeout(
       function() {
           this.changePage('charityShow');
+          window.scrollTo(0, 500);
       }
       .bind(this),
       500
