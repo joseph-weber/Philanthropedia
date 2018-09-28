@@ -214,6 +214,7 @@ class App extends React.Component {
         }).catch(error => this.setState({
           charities: [],
         }));
+      window.scrollTo(0, 500);
   }
   /// Request to the API to set up charity show page
   getCharity(query) {
