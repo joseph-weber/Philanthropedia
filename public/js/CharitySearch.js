@@ -5,6 +5,7 @@ class CharitySearch extends React.Component {
   }
   handleSubmit(event){
     event.preventDefault();
+    window.scrollTo(0, 500);
     let zip;
     let city;
     let state;
