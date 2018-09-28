@@ -218,13 +218,10 @@ class App extends React.Component {
   /// Request to the API to set up charity show page
   getCharity(query) {
     query = query.split('')
-    console.log(query)
     while(query.length < 9){
       query.unshift('0')
     }
     query = query.join('')
-    console.log(query)
-    console.log(query)
     this.setState({
       currentQuery: query
     })
