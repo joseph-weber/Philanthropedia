@@ -4,6 +4,7 @@ class Crises extends React.Component {
   }
   componentDidMount() {
     // this.changePage("pageUserRegister");
+    ReactDOM.findDOMNode(this).scrollTop = 0;
     this.props.loadCrises();
   }
   getCharities(crisis_city, crisis_zip, crisis_state, crisis_category){

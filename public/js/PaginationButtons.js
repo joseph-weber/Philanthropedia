@@ -3,12 +3,10 @@ class PaginationButtons extends React.Component {
     super(props)
   }
   lastPage(){
-    ReactDOM.findDOMNode(this).scrollTop = 0;
     console.log('last page')
     this.props.pageChange('last')
   }
   nextPage(){
-    ReactDOM.findDOMNode(this).scrollTop = 0;
     console.log('next page')
     this.props.pageChange('next')
   }
